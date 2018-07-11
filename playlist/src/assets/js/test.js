@@ -24,32 +24,19 @@ var rawItems = [
 	{ name: 'bild4', type: 5 }, 
 ];
 
-var playList = [];
-
-
+var playList = generatePlayList(setObjectContent);
 
 function init() {
 	
 	try {
-//			generatePlayList(playList);
-		generatePlayList(setObjectContent, playList);
-		console.log(playList)
-
-		try {
-			var playInterval = setInterval(play_playList, 2000);
-
-		} catch (err) {
-			clearInterval(playInterval);
-			console.log(err);
-		}
+		var playInterval = setInterval(play_playList, 2000);
 
 	} catch (err) {
+		clearInterval(playInterval);
 		console.log(err);
 	}
+
 }
-
-
-
 
 //adding the non priority propertys in the obj{ 0:[] } by the values type;
 function setObjectContent() {
@@ -75,9 +62,10 @@ function setObjectContent() {
 	return obj;
 }
 //Fills the playlist with the values that exist on the vouchenen propertys
-function generatePlayList(setObj, list) {
+function generatePlayList(setObj) {
 	
 	var obj = setObj();
+	var list = [];
 	var index;
 	
 	$.each(obj[0], function(key, value) {
@@ -90,6 +78,7 @@ function generatePlayList(setObj, list) {
 		});
 		list.push(value)
 	});
+	return list;
 }
 
 /*
