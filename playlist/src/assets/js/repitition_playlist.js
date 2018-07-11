@@ -1,33 +1,18 @@
 import $ from 'jquery';
 
-//var rawItems = [
-//	{ name: "bild1", type: 0 }, 
-//	{ name: "bild2", type: 2 }, 
-//	{ name: "bild3", type: 2 }, 
-//	{ name: "bild4", type: 3 },
-//	{ name: "bild5", type: 3 }, 
-//	{ name: "bild6", type: 3 },
-//	{ name: "bild1", type: 0 }, 
-//	{ name: "bild2", type: 2 }, 
-//	{ name: "bild3", type: 2 }, 
-//	{ name: "bild4", type: 3 },
-//	{ name: "bild5", type: 3 }, 
-//	{ name: "bild6", type: 3 },
-//];
-
 var rawItems = [
-	{ name: 1, type: 0 }, 
-	{ name: 2, type: 2 }, 
-	{ name: 3, type: 2 }, 
-	{ name: 4, type: 3 },
-	{ name: 5, type: 3 }, 
-	{ name: 6, type: 3 },
-	{ name: 1, type: 0 }, 
-	{ name: 2, type: 2 }, 
-	{ name: 3, type: 2 }, 
-	{ name: 4, type: 3 },
-	{ name: 5, type: 3 }, 
-	{ name: 6, type: 3 },
+	{ name: "bild1", type: 0 }, 
+	{ name: "bild2", type: 2 }, 
+	{ name: "bild3", type: 2 }, 
+	{ name: "bild4", type: 3 },
+	{ name: "bild5", type: 3 }, 
+	{ name: "bild6", type: 3 },
+	{ name: "bild1", type: 0 }, 
+	{ name: "bild2", type: 2 }, 
+	{ name: "bild3", type: 2 }, 
+	{ name: "bild4", type: 3 },
+	{ name: "bild5", type: 3 }, 
+	{ name: "bild6", type: 3 },
 ];
 
 var obj = { 0: [] };
@@ -38,11 +23,9 @@ var element = 0,
 function init() {
 	
 	try {
-		setObjectContent(rawItems);
-		
-//		sortByType(rawItems);
-//		createObjContent(rawItems);
-//		setObjectContent(rawItems, obj);
+		sortByType(rawItems);
+		createObjContent(rawItems);
+		setObjectContent(rawItems, obj);
 		
 		try {
 			generatePlayList(playList);
@@ -52,72 +35,52 @@ function init() {
 				
 			} catch (err) {
 				clearInterval(playInterval);
-				console.log(`[ ERROR by playing the Playlist ] : ${err.name} - ${err.message}`);
 				console.log(err);
 			}
 			
 		} catch (err) {
-			console.log(`[ ERROR by generatingPlaylist ] : ${err.name} - ${err.message}`);
 			console.log(err);
 		}
 		
 	} catch (err) {
-		console.log(`[ ERROR by initialize ] : ${err.name} - ${err.message}`);
 		console.log(err);
 	}	
 }
 
-function setObjectContent(items) {
+//sorted by type ascending so that the order in the new object is correct
+function sortByType(items) {
 	
-	$.each(items, function(key,value) {
-		if (value.type < 2) {
-			obj[0].push(items[key])
-		} else if (typeof obj[key] === 'undefined' && typeof obj[value.type] == 'undefined') {
-			obj[value.type] = [];
-			obj[value.type].push(value);
-		} else {
-			obj[value.type].push(value);
+	for (var x = 0; x < items.length; x++) {
+		for (var y = 0; y < items.length; y++) {
+			if (items[x].type < items[y].type) {
+				var tmp = items[x];
+				items[x] = items[y];
+				items[y] = tmp;
+			}
 		}
-	});
+	}
 }
-
-// sorted by type ascending so that the order in the new object is correct
-//function sortByType(items) {
-//	
-//	for (var x = 0; x < items.length; x++) {
-//		for (var y = 0; y < items.length; y++) {
-//			if (items[x].type < items[y].type) {
-//				var tmp = items[x];
-//				items[x] = items[y];
-//				items[y] = tmp;
-//			}
-//		}
-//	}
-//}
-//
-// creates, based on the data, the content for the object
-//function createObjContent(items) {
-//	
-//	for (var item of items) 
-//		for (var _type in item) 
-//			for (var i = 0; i < items.length; i++) 
-//				if (item.type === i && _type == 'type') 
-//					obj[_type + '_' + item.type] = new Array();
-//}
-//
-// fills the array with the objects and their given types in the right order
-//function setObjectContent(items, object) {
-//	
-//	for (var item of items) 
-//		for (var _type in item) 
-//			for (var i = 0; i < items.length; i++) 
-//				if (item.type === i && _type == 'type') 
-//					object[_type + '_' + i].push(item);	
-//}
+//creates, based on the data, the content for the object
+function createObjContent(items) {
+	
+	for (var item of items) 
+		for (var _type in item) 
+			for (var i = 0; i < items.length; i++) 
+				if (item.type === i && _type == 'type') 
+					obj[_type + '_' + item.type] = new Array();
+}
+//fills the array with the objects and their given types in the right order
+function setObjectContent(items, object) {
+	
+	for (var item of items) 
+		for (var _type in item) 
+			for (var i = 0; i < items.length; i++) 
+				if (item.type === i && _type == 'type') 
+					object[_type + '_' + i].push(item);	
+}
 
 // generates the playlist
 function generatePlayList(list) {
-	
 	
 	var obj_size = Object.keys(obj).length;
 	var obj_type_0_size = 0;
@@ -223,13 +186,11 @@ function generatePlayList(list) {
 								}
 							} else 
 								count_type_3++;
-							
 							break
 							
 						default:
 							list[index] = obj[item];
 							break;	
-							
 					}
 					
 					if (list[index] === undefined) 
@@ -250,6 +211,7 @@ function generatePlayList(list) {
 	return list;
 }
 
+// Play the playlist
 function play_playList() {
 	
 	var screen = document.getElementById('playList_1');
