@@ -3,25 +3,25 @@ import $ from 'jquery';
 var rawItems = [
 	{ name: 'bild1', type: 0 },
 	{ name: 'bild2', type: 0 },
-	{ name: 'bild3', type: 0 }, 
+	{ name: 'bild3', type: 0 },
 	{ name: 'bild4', type: 0 },
 	{ name: 'bild5', type: 0 },
-	{ name: 'bild6', type: 0 }, 
-	{ name: 'bild1', type: 1 }, 
+	{ name: 'bild6', type: 0 },
+	{ name: 'bild1', type: 1 },
 	{ name: 'bild2', type: 1 },
-	{ name: 'bild3', type: 1 }, 
+	{ name: 'bild3', type: 1 },
 	{ name: 'bild4', type: 2 },
-	{ name: 'bild5', type: 2 }, 
+	{ name: 'bild5', type: 2 },
 	{ name: 'bild6', type: 3 },
 	{ name: 'bild1', type: 3 },
-	{ name: 'bild2', type: 3 }, 
+	{ name: 'bild2', type: 3 },
 	{ name: 'bild3', type: 4 },
 	{ name: 'bild3', type: 4 },
 	{ name: 'bild4', type: 5 },
-	{ name: 'bild5', type: 5 }, 
+	{ name: 'bild5', type: 5 },
 	{ name: 'bild6', type: 5 },
-	{ name: 'bild1', type: 5 }, 
-	{ name: 'bild4', type: 5 }, 
+	{ name: 'bild1', type: 5 },
+	{ name: 'bild4', type: 5 },
 ];
 
 var playList = generatePlayList(setObjectContent);
@@ -30,7 +30,7 @@ function init() {
 	
 	try {
 		var playInterval = setInterval(play_playList, 2000);
-
+		
 	} catch (err) {
 		clearInterval(playInterval);
 		console.log(err);
@@ -47,7 +47,7 @@ function setObjectContent() {
 		if (value.type < 2 || value.type % 4 === 0) {
 			
 			if (Object.keys(obj).length === 0) {
-				obj[0] = new Array(value);	
+				obj[0] = new Array(value);
 			} else {
 				obj[0].push(value);
 			}
@@ -70,7 +70,7 @@ function generatePlayList(setObj) {
 	
 	$.each(obj[0], function(key, value) {
 		index = 0;
-		$.each(obj[index], function(k, val) {	
+		$.each(obj[index], function(k, val) {
 			if (key % k === 0 && typeof obj[index] !== 'undefined') {
 				list.push(obj[index]);
 			}
