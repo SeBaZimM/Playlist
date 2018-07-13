@@ -1,32 +1,13 @@
 import $ from 'jquery';
 
-var rawItems = [
-	{ name:  'bild1', type: 5 },
-	{ name:  'bild2', type: 5 },
-	{ name:  'bild3', type: 5 },
-	{ name:  'bild4', type: 5 },
-	{ name:  'bild5', type: 5 },
-	{ name:  'bild6', type: 4 },
-	{ name:  'bild7', type: 4 },
-	{ name:  'bild8', type: 4 },
-	{ name:  'bild9', type: 4 },
-	{ name: 'bild10', type: 3 },
-	{ name: 'bild11', type: 3 },
-	{ name: 'bild12', type: 3 },
-	{ name: 'bild13', type: 2 },
-	{ name: 'bild14', type: 2 },
-	{ name: 'bild15', type: 1 },
-	{ name: 'bild16', type: 0 },
-];
-
-var playList = generatePlayList(rawItems);
-console.log(playList);
+//var playlistObject = JSON.parse(jsonPlaylist);
+//var weightedList = createWeightedPlaylist(jsonPlaylist);
 
 function init() {
-	
+
 	try {
-//		var playInterval = setInterval(play_playList, 2000);
-		
+		var playInterval = setInterval(play_playList, 2000);
+
 	} catch (err) {
 		clearInterval(playInterval);
 		console.log(err);
@@ -34,86 +15,88 @@ function init() {
 }
 
 //adding the non priority propertys in the obj{ 0:[] } by the values type;
-function setObjectContent(items) {
+function generateWeightedPlaylist(playlist) {
 	
-	var obj = new Object();
-	$.each(items, function(key, value) {
+	var wheightedPlaylist = JSON.parse(playlist).playlist;
+	var processedPlayList = {};
+	
+	$.each(wheightedPlaylist, function (key, value) {
 		
-		if (typeof value.type !== 'number') { return; }
-		if (Object.keys(obj).length === 0) 	{ obj[0] = new Array(); console.log('create obj[0]')}
-		
-		if (value.type < 2 || value.type % 4 === 0) {
-			obj[0].push(value);
-			console.log('push', value ,'into obj[0]')
-
-		} else if (typeof obj[key] === 'undefined' || typeof obj[value.type] === 'undefined') {
+		if (typeof value.repetitionFrequency !== 'number') { 
+			return; 
+		}
+		if (Object.keys(processedPlayList).length === 0) {
+			processedPlayList[0] = new Array();
+		}
+		if (value.repetitionFrequency < 2) {
+			processedPlayList[0].push(value);
 			
-			if (typeof obj[value.type] !== 'undefined') {
-				obj[value.type].push(value);
-				console.log('push', value ,'into obj['+ value.type + ']');
+		} else if (typeof processedPlayList[key] === 'undefined' 
+				   || typeof processedPlayList[value.repetitionFrequency] === 'undefined') {
+			
+			if (typeof processedPlayList[value.repetitionFrequency] !== 'undefined') {
+				processedPlayList[value.repetitionFrequency].push(value);
 			} else {
-				obj[value.type] = new Array(value);
-				console.log('create new Array on obj['+value.type+']')
-				console.log('push', value ,'into obj['+ value.type + ']');
+				processedPlayList[value.repetitionFrequency] = new Array(value);
 			}
 			
-		} else if (obj[value.type] === 'undefined' || Object.keys(obj[value.type].length === 0)) {
-			obj[value.type].push(value);
-			console.log('push', value ,'into obj['+ value.type + ']');
 		} else {
-			obj[value.type].push(value);
-			console.log('push', value ,'into obj['+ value.type + ']');
+			processedPlayList[value.repetitionFrequency].push(value);
 		}
 	});
-	console.log(obj);
-	return obj;
+	return processedPlayList;
 }
 //Fills the playlist with the values that exist on the vouchenen propertys
-function generatePlayList(items) {
-	
-	var obj = setObjectContent(items);
-	var list = [];
+function createWeightedPlaylist(playlist) {
+
+	var wheightedPlaylist = generateWeightedPlaylist(playlist);
+	var weightedList = [];
 	var index;
 	
-	$.each(obj[0], function(key, value) {
+	$.each(wheightedPlaylist[0], function (key_0, value_0) {
 		index = 0;
-		$.each(obj[index], function(k, val) {	
-			if (key % k === 0 && typeof obj[index] !== 'undefined') {
-				list.push(obj[index]);
-			}
-			index++;
+		$.each(wheightedPlaylist, function (key, value) {
+			$.each(wheightedPlaylist[key], function(k, v) {		
+				if (key_0 % key === 0 && typeof wheightedPlaylist[index] !== 'undefined') {
+					weightedList.push(value[k])
+				}
+			});
 		});
-		list.push(value)
+		index++;
+		weightedList.push(value_0);
 	});
-	return list;
+	return weightedList;
 }
 
 // OPTIONAL _ JUST FOR OUTPUT
 var element = 0,
 	count = 0;
+
 function play_playList() {
+
+	var playList = createWeightedPlaylist(jsonPlaylist);
 	
 	var screen = document.getElementById('playList_1');
 	screen.removeAttribute('class');
 	screen.innerHTML = '';
-	
+
 	if (playList[element].length != undefined) {
 		if (count < playList[element].length) {
 			screen.classList.add(playList[element][count].name);
 			screen.innerHTML = playList[element][count].name;
 			console.log(playList[element][count]);
 			count++;
-			
+
 		} else {
 			count = 0;
 			element++;
-			
+
 			if (playList[element].length == undefined) {
 				screen.classList.add(playList[element].name);
 				screen.innerHTML = playList[element].name;
 				console.log(playList[element]);
 				element++;
-				
+
 			} else {
 				screen.classList.add(playList[element][count].name);
 				screen.innerHTML = playList[element][count].name;
@@ -121,7 +104,7 @@ function play_playList() {
 				count++;
 			}
 		}
-		
+
 	} else {
 		screen.classList.add(playList[element].name);
 		screen.innerHTML = playList[element].name;
@@ -129,37 +112,15 @@ function play_playList() {
 		element++;
 		count = 0;
 	}
-	
+
 	if (element == playList.length) {
 		element = 0;
 		count = 0;
 	}
 }
 
-init();
 
-// CONSOLE OUTPUT
-/*
-create obj[0]  app.js:22398:25
-create new Array on obj[5]  app.js:22411:5
-push Object { name: "bild1", type: 5 } into obj[5]  app.js:22412:5
-push Object { name: "bild2", type: 5 } into obj[5]  app.js:22408:5
-push Object { name: "bild3", type: 5 } into obj[5]  app.js:22408:5
-push Object { name: "bild4", type: 5 } into obj[5]  app.js:22408:5
-push Object { name: "bild5", type: 5 } into obj[5]  app.js:22408:5
-push Object { name: "bild6", type: 4 } into obj[0]  app.js:22403:4
-push Object { name: "bild7", type: 4 } into obj[0]  app.js:22403:4
-push Object { name: "bild8", type: 4 } into obj[0]  app.js:22403:4
-push Object { name: "bild9", type: 4 } into obj[0]  app.js:22403:4
-create new Array on obj[3]  app.js:22411:5
-push Object { name: "bild10", type: 3 } into obj[3]  app.js:22412:5
-push Object { name: "bild11", type: 3 } into obj[3]  app.js:22408:5
-push Object { name: "bild12", type: 3 } into obj[3]  app.js:22408:5
-create new Array on obj[2]  app.js:22411:5
-push Object { name: "bild13", type: 2 } into obj[2]  app.js:22412:5
-push Object { name: "bild14", type: 2 } into obj[2]  app.js:22408:5
-push Object { name: "bild15", type: 1 } into obj[0]  app.js:22403:4
-push Object { name: "bild16", type: 0 } into obj[0]  app.js:22403:4
-Object [ Array[6], <1 freie Position>, Array[2], Array[3], <1 freie Position>, Array[5] ]  app.js:22422:2
-Array [ Array[2], Array[3], Array[5], Object, Object, Array[2], Object, Array[3], Object, Array[2], 3 weitere… ]
-*/
+var jsonPlaylist = '{"playlist":[{"id":1,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":0,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true},{"id":2,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc999501b4.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":1462,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":1,"name":"5b1fc999501b4.jpg","url":"5b1fc999501b4.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc999501b4.jpg","fileSize":1462,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"n6VtpNa9","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc999501b4.jpg","isDownloaded":true},{"id":3,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b2969c5b3d20.mp4","mimeType":{"MIME_GROUP":"VIDEO","MIME_TYPE":"video/mp4"},"size":37879,"updationDate":null,"filehash":"5b2969c5b3d20","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":2,"name":"5b2969c5b3d20.mp4","url":"5b2969c5b3d20.mp4","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b2969c5b3d20.mp4","fileSize":37879,"typeId":{"MIME_GROUP":"VIDEO","MIME_TYPE":"video/mp4"},"type":{"MIME_GROUP":"VIDEO","MIME_TYPE":"video/mp4"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b2969c5b3d20","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b2969c5b3d20.mp4","isDownloaded":true},{"id":4,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b3d03e6457a6.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":2638,"updationDate":null,"filehash":"5b3d03e6457a6","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":2,"name":"5b3d03e6457a6.jpg","url":"5b3d03e6457a6.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b3d03e6457a6.jpg","fileSize":2638,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b3d03e6457a6","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b3d03e6457a6.jpg","isDownloaded":true},{"id":5,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44d0fd89438.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":4224,"updationDate":null,"filehash":"5b44d0fd89438","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":3,"name":"5b44d0fd89438.jpg","url":"5b44d0fd89438.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b44d0fd89438.jpg","fileSize":4224,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b44d0fd89438","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44d0fd89438.jpg","isDownloaded":true},{"id":6,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44e87ac634e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":2542,"updationDate":null,"filehash":"5b44e87ac634e","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":3,"name":"5b44e87ac634e.jpg","url":"5b44e87ac634e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b44e87ac634e.jpg","fileSize":2542,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b44e87ac634e","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44e87ac634e.jpg","isDownloaded":true},{"id":7,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":3,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true},{"id":8,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc999501b4.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":1462,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":5,"name":"5b1fc999501b4.jpg","url":"5b1fc999501b4.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc999501b4.jpg","fileSize":1462,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"n6VtpNa9","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc999501b4.jpg","isDownloaded":true},{"id":9,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b2969c5b3d20.mp4","mimeType":{"MIME_GROUP":"VIDEO","MIME_TYPE":"video/mp4"},"size":37879,"updationDate":null,"filehash":"5b2969c5b3d20","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":5,"name":"5b2969c5b3d20.mp4","url":"5b2969c5b3d20.mp4","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b2969c5b3d20.mp4","fileSize":37879,"typeId":{"MIME_GROUP":"VIDEO","MIME_TYPE":"video/mp4"},"type":{"MIME_GROUP":"VIDEO","MIME_TYPE":"video/mp4"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b2969c5b3d20","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b2969c5b3d20.mp4","isDownloaded":true},{"id":10,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b3d03e6457a6.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":2638,"updationDate":null,"filehash":"5b3d03e6457a6","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":5,"name":"5b3d03e6457a6.jpg","url":"5b3d03e6457a6.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b3d03e6457a6.jpg","fileSize":2638,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b3d03e6457a6","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b3d03e6457a6.jpg","isDownloaded":true},{"id":11,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44d0fd89438.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":4224,"updationDate":null,"filehash":"5b44d0fd89438","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":5,"name":"5b44d0fd89438.jpg","url":"5b44d0fd89438.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b44d0fd89438.jpg","fileSize":4224,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b44d0fd89438","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44d0fd89438.jpg","isDownloaded":true},{"id":12,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44e87ac634e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":2542,"updationDate":null,"filehash":"5b44e87ac634e","x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":5,"name":"5b44e87ac634e.jpg","url":"5b44e87ac634e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b44e87ac634e.jpg","fileSize":2542,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"5b44e87ac634e","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b44e87ac634e.jpg","isDownloaded":true},{"id":13,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":0,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true},{"id":14,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":0,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true},{"id":15,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":0,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true},{"id":16,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":0,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true},{"id":17,"filename":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","mimeType":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"size":578,"updationDate":null,"filehash":null,"x":0,"y":0,"width":100,"height":100,"duration":10,"repetitionFrequency":0,"name":"5b1fc99064e3e.jpg","url":"5b1fc99064e3e.jpg","remoteUrl":"http://api.wmc2.staging.wizai.com/uploads//5b1fc99064e3e.jpg","fileSize":578,"typeId":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"type":{"MIME_GROUP":"IMAGE","MIME_TYPE":"image/jpeg"},"downloadFromExternalSource":false,"downloadFailed":false,"isLocal":true,"assets":[],"ratio":1,"hash":"kOkiCpXi","localFileName":"file:///opt/usr/home/owner/apps_rw/5pr6vCGXHr/data/media/5b1fc99064e3e.jpg","isDownloaded":true}]}';
+
+
+init();

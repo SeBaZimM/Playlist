@@ -49,36 +49,33 @@ body {
     }
 }
 
-.bild1 {
-    background: url('../img/pic01.jpg');
-}
+.bild1  { background: url('../img/startseite_niesmann_teaser_weber.jpg'); }
+.bild2  { background: url('../img/csm_Das_Goldene_C-2016_small_7f50ba19a9.jpg'); }
+.bild3  { background: url('../img/ic-logo.svg'); }
+.bild4  { background: url('../img/ki_image.jpg'); }
+.bild5  { background: url('../img/logo.png'); }
+.bild6  { background: url('../img/niesmann-concorde-centurion-teaser-startseite.jpg'); }
+.bild7  { background: url('../img/niesmann-concorde-haendler-teaser-start.jpg'); }
+.bild8  { background: url('../img/niesmann-config-bild.jpg'); }
+.bild9  { background: url('../img/niesmann-sondermodelle-bild.jpg'); }
+.bild10 { background: url('../img/niesmann_startseite_buehne_concorde_neu.jpg'); }
+.bild11 { background: url('../img/niesmann_startseite_teaser_somo_2017.jpg'); }
+.bild12 { background: url('../img/pic01.jpg'); }
+.bild13 { background: url('../img/pic02.jpg'); }
+.bild14 { background: url('../img/pic03.jpg'); }
+.bild15 { background: url('../img/pic12.jpg'); }
+.bild16 { background: url('../img/Samsung.jpg'); }
+.bild17 { background: url('../img/startseite_niesmann_buehne_02.jpg'); }
+.bild18 { background: url('../img/startseite_niesmann_teaser_vermietung_concorde.jpg'); }
 
-.bild2 {
-    background: url('../img/pic02.jpg');
-}
 
-.bild3 {
-    background: url('../img/pic03.jpg');
-}
-
-.bild4 {
-    background: url('../img/pic12.jpg');
-}
-
-.bild5 {
-    background: url('../img/ki_image.jpg');
-}
-
-.bild6 {
-    background: url('../img/logo.png');
-}
-
-.bild1,
-.bild2,
-.bild3,
-.bild4,
-.bild5,
-.bild6 {
+.bild1,  .bild2,  .bild3,
+.bild4,  .bild5,  .bild6,  
+.bild7,  .bild8,  .bild9,  
+.bild10, .bild11, .bild12, 
+.bild13, .bild14, .bild15, 
+.bild16, .bild17, .bild18,
+{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
