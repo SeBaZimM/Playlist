@@ -9,7 +9,7 @@ import Foundation from 'foundation-sites';
 //import './lib/foundation-explicit-pieces';
 
 //import './repitition_playlist.js';
-import './test.js';
-//import './tmp.js';
+//import './test.js';
+import './tmp.js';
 
 $(document).foundation();
