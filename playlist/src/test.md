@@ -5,7 +5,7 @@
 - Anhand der Wiederholungsfrequenz wird die Wiederholung der Ausgabe der Liste bestimmt.
 
 ## Szenario 1: 
-- Alle Elemente haben die selbe Wiederholungsfrequenz
+### Alle Elemente haben die selbe Wiederholungsfrequenz
 
 ### Fall 1:
 #### Alle Elemente haben eine Wiederholungsfrequens von 0
@@ -44,7 +44,7 @@
 - Bei einer Playlist ohne explizite angaben einer Wiederholungsfrequenz (Standard 0 oder 1) hat dieses Szenario aus dieser Sicht ihr erwartetes Ergebnis zurückgeliefert.
 
 ## Szenario 2:
-Ein oder mehrere Elemente haben eine Wiederholungsfrequenz  > 1 aber mindestens ein Element hat eine Wiederholungsfrequent <= 1
+### Ein oder mehrere Elemente haben eine Wiederholungsfrequenz  > 1 aber mindestens ein Element hat eine Wiederholungsfrequent <= 1
 
 ### Fall 1
 #### Ein / mehrere Element(e) hat eine Wiederholungsfrequenz von 2
@@ -72,7 +72,7 @@ Ein oder mehrere Elemente haben eine Wiederholungsfrequenz  > 1 aber mindestens 
 - Eventueller Konflikt mit Szenario 3 ?
 
 ## Szenario 3:
-Mindestens zwei Elemente haben eine Wiederholungsfrequenz > 1 aber != die selbe Wiederholungsfrequenz  
+### Mindestens zwei Elemente haben eine Wiederholungsfrequenz > 1 aber != die selbe Wiederholungsfrequenz  
 aber mindestens ein Element hat eine Wiederholungsfrequent < 2
 
 ### Fall 1
