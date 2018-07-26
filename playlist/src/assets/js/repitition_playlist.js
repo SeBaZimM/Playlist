@@ -37,12 +37,11 @@ function Playlist() {
 
 		typeof playlist === 'string' ? playlist = JSON.parse(playlist) : playlist = playlist;
 		var processedPlaylist = playlist;
-		var separatedLists = {},
-			unweightList = {},
+		var unweightList = {},
 			weightList = {};
 
 		try {
-			separatedLists = separatePlaylistForWeightedPlay(processedPlaylist);
+			var separatedLists = separatePlaylistForWeightedPlay(processedPlaylist);
 			unweightList = separatedLists.unweightedList;
 			weightList = separatedLists.weightedList;
 
@@ -74,6 +73,7 @@ function Playlist() {
 
 				if (lastPresentationId == null)
 					lastPresentationId = element.presentationId;
+
 				if (runIndex === 0 || lastPresentationId === element.presentationId) {
 					unWeightedPlaylist.push(element);
 
@@ -137,6 +137,7 @@ function Playlist() {
 
 	// Optional just for output in console and display
 	var element = 0;
+
 	function play_playList() {
 
 		var playList = createWeightedPlaylist(jsonPlaylist);
@@ -148,20 +149,20 @@ function Playlist() {
 		$.each(playList[element], function (key, val) {
 
 			if (typeof val === 'object') {
-				
-				if (val === null) 
+
+				if (val === null)
 					text += `${key} : null<br>`;
-				
-				$.each(val, function (k, v) { 
-					text += `${key} : ${k} = ${v}<br>`; 
+
+				$.each(val, function (k, v) {
+					text += `${key} : ${k} = ${v}<br>`;
 				});
-				
+
 			} else text += `${key} : ${val}<br>`;
 
 		});
-		for (var el of playList) 
+		for (var el of playList)
 			flow += `[ ${el.repetitionFrequency} ] `;
-		
+
 		console.log(playList[element]);
 
 		screen_main.innerHTML = `${text}`;
@@ -173,7 +174,8 @@ function Playlist() {
 			element = 0;
 	}
 
-	var start_interval = setInterval(play_playList, 3500)
+//	var start_interval = setInterval(play_playList, 3500)
+	play_playList();
 }
 
 
