@@ -149,14 +149,11 @@ function Playlist() {
 		$.each(playList[element], function (key, val) {
 
 			if (typeof val === 'object') {
-
 				if (val === null)
 					text += `${key} : null<br>`;
-
 				$.each(val, function (k, v) {
 					text += `${key} : ${k} = ${v}<br>`;
 				});
-
 			} else text += `${key} : ${val}<br>`;
 
 		});
