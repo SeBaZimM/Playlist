@@ -34,7 +34,6 @@ function Playlist() {
 			return processedPlaylist;
 		}
 
-
 		$.each(unweightList, function (element_key, element_unweightList) {
 			$.each(element_unweightList, function (key, element) {
 				$.each(weightList, function (weight, wList) {
@@ -49,7 +48,6 @@ function Playlist() {
 		});
 		return finalPlaylist;
 	};
-
 
 	var separatePlaylistForWeightedPlay = function (playlist) {
 
