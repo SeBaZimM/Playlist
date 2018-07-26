@@ -47,19 +47,19 @@
 ### Ein oder mehrere Elemente haben eine Wiederholungsfrequenz  > 1 aber mindestens ein Element hat eine Wiederholungsfrequent <= 1
 
 ### Fall 1
-#### Ein / mehrere Element(e) hat eine Wiederholungsfrequenz von 2
+#### Ein / mehrere Element(e) hat/haben eine Wiederholungsfrequenz von 2
 - Erwartet	- 2 0 2 0 2 0 2 0 2 0 2 0 2 0 2 0 2 0 2 0 2 0
 - Ist		- 2 0 0 2 0 0 2 0 0 2 0 0 2 0 0 2 0
 - Ergebnis	- durchgefallen
 
 ### Fall 2
-#### Ein / mehrere Element(e) hat eine Wiederholungsfrequenz von 3
+#### Ein / mehrere Element(e) hat/haben eine Wiederholungsfrequenz von 3
 - Erwartet	- 3 0 0 3 0 0 3 0 0 3 0 0 3 0 0 3 0
 - Ist		- 3 0 0 0 3 0 0 0 3 0 0 0 3 0 0
 - Ergebnis	- durchgefallen
 
 ### Fall 3
-#### Ein / mehrere Element(e) hat eine Wiederholungsfrequenz von 5
+#### Ein / mehrere Element(e) hat/haben eine Wiederholungsfrequenz von 5
 - Erwartet	- noch keine Erwartung
 - Ist		- noch kein Ergebnis
 - Ergebnis	- ausstehend
