@@ -57,15 +57,15 @@ function Playlist() {
 		var unweightedListLength = 0;
 
 		$.each(playlist, function (key, element) {
-			
+
 			if (element.hasOwnProperty("repetitionFrequency") &&
 				element.repetitionFrequency !== null &&
 				element.repetitionFrequency > 1) {
-				
+
 				weightedList.hasOwnProperty(element.repetitionFrequency) ?
 					weightedList[element.repetitionFrequency + ""].push(element) :
 					weightedList[element.repetitionFrequency + ""] = [element];
-				
+
 				weightedListLength++;
 
 			} else {
@@ -92,12 +92,12 @@ function Playlist() {
 	var time = [];
 	var index_time = 0;
 
-	$.each(playList, function (key, val) { 
+	$.each(playList, function (key, val) {
 		time.push(val.duration * 1000);
 	});
-	
+
 	var play_playList = function () {
-		
+
 		playList[element].remoteUrl.endsWith('mp4') ?
 			htmlScreen.innerHTML = `<video src="${playList[element].remoteUrl}" autoplay></video>` :
 			htmlScreen.innerHTML = `<img src="${playList[element].remoteUrl}" alt="image">`;
@@ -107,9 +107,9 @@ function Playlist() {
 		element++;
 		index_time++;
 
-		if (index_time === time.length) 
+		if (index_time === time.length)
 			index_time = 0;
-		if (element == Object.keys(playList).length) 
+		if (element == Object.keys(playList).length)
 			element = 0;
 	}
 	play_playList();
