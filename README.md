@@ -1,9 +1,6 @@
 # Playlist
-<a href="#Szenario-1">Szenario 1</a>
-|[Szenario 1](#Szenario-1)|[Szenario 2](#Szenario-2)|[Szenario 3](#Szenario-3)|
-|-------------------------|-------------------------|-------------------------|
-
-# Testabläufe der Playlist anhand verschiedene Fällen
+---
+## Testabläufe der Playlist anhand verschiedene Fällen
 
 ## Gegeben:
 * Playlist mit 12 Elemente. Jedes element besitzt eine Wiederholungsfrequenz. 
