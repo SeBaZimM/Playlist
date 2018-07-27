@@ -1,6 +1,6 @@
 # Playlist
 
-|[Szenatio 1](/Szenario_1)|[Szenatio 2](#Szenario_1)|[Szenatio 3](Szenario_1)|
+|[Szenatio 1](#Szenario_1)|[Szenatio 2](#Szenario_2)|[Szenatio 3](#Szenario_3)|
 |-------------------------|-------------------------|-------------------------|
 
 # Testabläufe der Playlist anhand verschiedene Fällen
