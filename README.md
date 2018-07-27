@@ -94,8 +94,15 @@ aber mindestens ein Element hat eine Wiederholungsfrequent < 2
 |Ergebnis                                            		          |bestanden				|
 
 ### Fall 2
-|Ein/mehrere Element(e) hat/haben eine Wiederholungsfrequenz von 2, 3 und 5|                      		      |
+|Ein/mehrere Element(e) hat/haben eine Wiederholungsfrequenz von 2, 3 und 5|       			               		      |
 |-------------------------------------------------------------------------------|-------------------------------------|
-|Erwartet                                            		    		|2 3 5 0 0 2 0 3 0 2 0 5 0 2 3 0 0 2 0|
-|  Ist                                                		    		|2 3 5 0 0 2 0 3 0 2 0 5 0 2 3 0 0 2 0|
-|Ergebnis                                            		    		|bestanden			      |
+|Erwartet                                            		    				|2 3 5 0 0 2 0 3 0 2 0 5 0 2 3 0 0 2 0|
+|  Ist                                                		    				|2 3 5 0 0 2 0 3 0 2 0 5 0 2 3 0 0 2 0|
+|Ergebnis                                            		    				|bestanden			      			  |
+
+### Fall 3
+|Ein/mehrere Element(e) hat/haben eine Wiederholungsfrequenz von 2 und 5		|                        		      |
+|-------------------------------------------------------------------------------|-------------------------------------|
+|Erwartet                                            		    				|ausstehend							  |
+|  Ist                                                		    				|ausstehend							  |
+|Ergebnis                                            		    				|bestanden  		      			  |
