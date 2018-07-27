@@ -1,6 +1,6 @@
 # Playlist
-
-|[Szenario-1](#Szenario-1)|[Szenario-2](#Szenario-2)|[Szenario-3](#Szenario-3)|
+<a href="#Szenario-1">Szenario 1</a>
+|[Szenario 1](#Szenario-1)|[Szenario 2](#Szenario-2)|[Szenario 3](#Szenario-3)|
 |-------------------------|-------------------------|-------------------------|
 
 # Testabläufe der Playlist anhand verschiedene Fällen
@@ -9,8 +9,7 @@
 * Playlist mit 12 Elemente. Jedes element besitzt eine Wiederholungsfrequenz. 
 * Anhand der Wiederholungsfrequenz wird die Wiederholung der Ausgabe der Liste bestimmt.
 
-<a href="#Szenario-1">Szenario-1</a>
-## Szenario-1 : 
+## Szenario 1: 
 ### Alle Elemente haben die selbe Wiederholungsfrequenz
 
 ### Fall 1:
@@ -54,7 +53,7 @@
 * Die Ergebnisse sind alle undefined und somit durchgefallen.
 * Bei einer Playlist ohne explizite angaben einer Wiederholungsfrequenz (Standard 0 oder 1) hat dieses Szenario aus dieser Sicht ihr erwartetes Ergebnis zurückgeliefert.
 
-## Szenario-2 :
+## Szenario 2:
 ### Ein oder mehrere Elemente haben eine Wiederholungsfrequenz  > 1 aber mindestens ein Element hat eine Wiederholungsfrequent <= 1
 
 ### Fall 1
@@ -86,7 +85,7 @@
 * Test von Fall 3 ist ausstehend und noch zu testen?
 * Eventueller Konflikt mit Szenario 3 ?
 
-## Szenario-3 :
+## Szenario 3:
 ### Mindestens zwei Elemente haben eine Wiederholungsfrequenz > 1 aber != die selbe Wiederholungsfrequenz  
 aber mindestens ein Element hat eine Wiederholungsfrequent < 2
 
