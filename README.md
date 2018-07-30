@@ -102,8 +102,8 @@
 |---------------------------------------------------------------------------|-------------------------|
 |Erwartet																	|ausstehend			      |
 |  Ist																		|ausstehend			      |
-|Ergebnis																	|ausstehendcp			  |
+|Ergebnis																	|ausstehend				  |
 
 ### Fazit
 * Fall 1 und Fall 2 liefern das erwartete Ergebnis zurück.
-* Test von Fall 2 ist noch ausstehend.
+* Test von Fall 2 ist noch ausstehend. 
