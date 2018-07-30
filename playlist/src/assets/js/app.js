@@ -8,7 +8,6 @@ import Foundation from 'foundation-sites';
 // the line below
 //import './lib/foundation-explicit-pieces';
 
-//import './scripts/repitition_playlist.js';
-import './scripts/repitition_playlist_ecma6.js';
+import './scripts/repitition_playlist.js';
 
 $(document).foundation();
