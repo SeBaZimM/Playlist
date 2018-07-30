@@ -3,10 +3,14 @@
 		background: #801448;
 	}
 	img,
-	video {
+	video,
+	#ticker {
 		border-radius: 3px;
 		border: 1px solid white;
-		box-shadow: 0px 15px 20px black
+		box-shadow: 0px 15px 20px black;
+	}
+	#ticker {
+		text-align: center;
 	}
 
 </style>
@@ -15,4 +19,5 @@
 	<div class="grid-x grid-padding-y">
 		<div class="cell" id='playlist'></div>
 	</div>
+	<div class="cell callout success" id='ticker'></div>
 </div>

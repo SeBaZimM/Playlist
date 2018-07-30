@@ -16,6 +16,20 @@ function Playlist() {
 		_elements.push(element);
 	}
 
+	/**
+	 * Creates weighted playlist by separating the playlist into a weighted part and non-weighted part.
+	 * Iterates through the non weighted list and perform modulo operation on run index to check whether
+	 * a block of the weighted list should be inserted into the final playlist or not.
+	 *
+	 * Be aware that there could be (by user fault) more weighted entries than non-weighted this method just inserts
+	 * the weighted into the unweighted and not processing this special case by re-sorting the weighted list again against
+	 * itself. Thus leads to appending the whole weighted list to a playlist but sorted asc. by their weight.
+	 * Next thing to consider / implement : do we want to keep all elements of a presentation together or may they
+	 * be separated by weighted elements from different presentation ?
+	 * 
+	 * @param playlist
+	 * @return {*}
+	 */
 	var createWeightedPlaylist = function (playlist) {
 
 		typeof playlist === 'string' ? playlist = JSON.parse(playlist) : playlist = playlist;
@@ -34,6 +48,9 @@ function Playlist() {
 			return processedPlaylist;
 		}
 
+		// INDEX   : 0 0 1 2 2 3 4 4 5 6 6 7 8 8 9 10 10
+		// PLAYLIST: 2 0 0 2 0 0 2 0 0 2 0 0 2 0 0  2 0
+
 		$.each(unweightList, function (element_key, element_unweightList) {
 			$.each(element_unweightList, function (key, element) {
 				$.each(weightList, function (weight, wList) {
@@ -46,9 +63,16 @@ function Playlist() {
 				finalPlaylist.push(element);
 			});
 		});
+
 		return finalPlaylist;
 	};
 
+	/**
+	 * Iterates through default playlist and stores repetition frequeny in separate list.
+	 * 
+	 * @param playlist
+	 * @return object
+	 */
 	var separatePlaylistForWeightedPlay = function (playlist) {
 
 		var weightedList = {};
@@ -84,34 +108,42 @@ function Playlist() {
 		}
 	}
 
-	//	 Optional just for output in console and display
-	var playList = createWeightedPlaylist(jsonPlaylist);
-	var htmlScreen = document.getElementById('playlist'); // test for demo
-	var element = 0;
+	function setOutput() {
 
-	var time = [];
-	var index_time = 0;
+		//	 Optional just for output in console and display
+		var playList = createWeightedPlaylist(jsonPlaylist);
+		var htmlScreen = document.getElementById('playlist'); // test for demo
+		var htmlTicker = document.getElementById('ticker'); // test for demo
+		var element = 0;
 
-	$.each(playList, function (key, val) {
-		time.push(val.duration * 1000);
-	});
+		var time = [];
+		var index_time = 0;
 
-	var play_playList = function () {
+		$.each(playList, function (key, val) {
+			time.push(val.duration * 1000);
+		});
 
-		playList[element].remoteUrl.endsWith('mp4') ?
-			htmlScreen.innerHTML = `<video class='cell large-12 auto' src='${playList[element].remoteUrl}' autoplay loop></video>` :
-			htmlScreen.innerHTML = `<img class='cell large-12' src='${playList[element].remoteUrl}' alt='${playList[element].name}'>`;
+		var play_playList = function () {
 
-		setTimeout(play_playList, time[index_time])
-		element++;
-		index_time++;
+			playList[element].remoteUrl.endsWith('mp4') ?
+				htmlScreen.innerHTML = `<video class='cell large-12 auto' src='${playList[element].remoteUrl}' autoplay loop></video>` :
+				htmlScreen.innerHTML = `<img class='cell large-12' src='${playList[element].remoteUrl}' alt='${playList[element].name}'>`;
 
-		if (index_time === time.length)
-			index_time = 0;
-		if (element == Object.keys(playList).length)
-			element = 0;
+			htmlTicker.innerHTML = `Name: ${playList[element].name}<br>RemoteUrl: ${playList[element].remoteUrl}`;
+
+			setTimeout(play_playList, time[index_time]);
+
+			element++;
+			index_time++;
+
+			if (index_time === time.length)
+				index_time = 0;
+			if (element == Object.keys(playList).length)
+				element = 0;
+		}
+		play_playList();
 	}
-	play_playList();
+	setOutput()
 }
 
 var jsonPlaylist = {
@@ -166,7 +198,7 @@ var jsonPlaylist = {
 		'width': 100,
 		'height': 100,
 		'duration': 10,
-		'repetitionFrequency': 5,
+		'repetitionFrequency': 0,
 		'name': '5b1fc999501b4.jpg',
 		'url': '5b1fc999501b4.jpg',
 		'remoteUrl': 'http://api.wmc2.staging.wizai.com/uploads//5b1fc999501b4.jpg',
@@ -202,7 +234,7 @@ var jsonPlaylist = {
 		'width': 100,
 		'height': 100,
 		'duration': 63,
-		'repetitionFrequency': 3,
+		'repetitionFrequency': 0,
 		'name': '5b2969c5b3d20.mp4',
 		'url': '5b2969c5b3d20.mp4',
 		'remoteUrl': 'http://api.wmc2.staging.wizai.com/uploads//5b2969c5b3d20.mp4',
