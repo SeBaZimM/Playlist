@@ -1,6 +1,6 @@
 # The Grid
 
-<p class="lead">Problem: You've got tons of content, each needing different sized cells, and don't know how to quick and easily get it all done. Solution: The awesome XY grid!</p>
+<p class='lead'>Problem: You've got tons of content, each needing different sized cells, and don't know how to quick and easily get it all done. Solution: The awesome XY grid!</p>
 
 ---
 
@@ -21,42 +21,42 @@ In the Grid you can nest cells down as far as you'd like. Just embed grid-x insi
 Using this framework is easy. Here's how your code will look when you use a series of `<div>` tags to create cells.
 
 ```html
-<div class="grid-x">
-  <div class="cell small-6 medium-4 large-3">...</div>
-  <div class="cell small-6 medium-8 large-9">...</div>
+<div class='grid-x'>
+  <div class='cell small-6 medium-4 large-3'>...</div>
+  <div class='cell small-6 medium-8 large-9'>...</div>
 </div>
 ```
 
-<div class="grid-x display">
-  <div class="cell small-12 large-4">4</div>
-  <div class="cell small-12 large-4">4</div>
-  <div class="cell small-12 large-4">4</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-4'>4</div>
+  <div class='cell small-12 large-4'>4</div>
+  <div class='cell small-12 large-4'>4</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-12 large-3">3</div>
-  <div class="cell small-12 large-6">6</div>
-  <div class="cell small-12 large-3">3</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-3'>3</div>
+  <div class='cell small-12 large-6'>6</div>
+  <div class='cell small-12 large-3'>3</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-12 large-2">2</div>
-  <div class="cell small-12 large-8">8</div>
-  <div class="cell small-12 large-2">2</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-2'>2</div>
+  <div class='cell small-12 large-8'>8</div>
+  <div class='cell small-12 large-2'>2</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-12 large-3">3</div>
-  <div class="cell small-12 large-9">9</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-3'>3</div>
+  <div class='cell small-12 large-9'>9</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-12 large-4">4</div>
-  <div class="cell small-12 large-8">8</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-4'>4</div>
+  <div class='cell small-12 large-8'>8</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-12 large-5">5</div>
-  <div class="cell small-12 large-7">7</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-5'>5</div>
+  <div class='cell small-12 large-7'>7</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-12 large-6">6</div>
-  <div class="cell small-12 large-6">6</div>
+<div class='grid-x display'>
+  <div class='cell small-12 large-6'>6</div>
+  <div class='cell small-12 large-6'>6</div>
 </div>
 
 ---
@@ -66,35 +66,35 @@ Using this framework is easy. Here's how your code will look when you use a seri
 In the Grid you can nest cells down as far as you'd like. Just embed grid-x inside cells and go from there. Each embedded grid-x can contain up to 12 cells.
 
 ```html
-<div class="grid-x">
-  <div class="cell small-8">8
-    <div class="grid-x">
-      <div class="cell small-8">8 Nested
-        <div class="grid-x">
-          <div class="cell small-8">8 Nested Again</div>
-          <div class="cell small-4">4</div>
+<div class='grid-x'>
+  <div class='cell small-8'>8
+    <div class='grid-x'>
+      <div class='cell small-8'>8 Nested
+        <div class='grid-x'>
+          <div class='cell small-8'>8 Nested Again</div>
+          <div class='cell small-4'>4</div>
         </div>
       </div>
-      <div class="cell small-4">4</div>
+      <div class='cell small-4'>4</div>
     </div>
   </div>
-  <div class="cell small-4">4</div>
+  <div class='cell small-4'>4</div>
 </div>
 ```
 
-<div class="grid-x display">
-  <div class="cell small-8">8
-    <div class="grid-x">
-      <div class="cell small-8">8 Nested
-        <div class="grid-x">
-          <div class="cell small-8">8 Nested Again</div>
-          <div class="cell small-4">4</div>
+<div class='grid-x display'>
+  <div class='cell small-8'>8
+    <div class='grid-x'>
+      <div class='cell small-8'>8 Nested
+        <div class='grid-x'>
+          <div class='cell small-8'>8 Nested Again</div>
+          <div class='cell small-4'>4</div>
         </div>
       </div>
-      <div class="cell small-4">4</div>
+      <div class='cell small-4'>4</div>
     </div>
   </div>
-  <div class="cell small-4">4</div>
+  <div class='cell small-4'>4</div>
 </div>
 
 ---
@@ -104,61 +104,61 @@ In the Grid you can nest cells down as far as you'd like. Just embed grid-x insi
 As you've probably noticed in the examples above, you have access to a small, medium, and large grid. If you know that your grid structure will be the same for small devices as it will be on large devices, just use the small grid. You can override your small grid classes by adding medium or large grid classes.
 
 ```html
-<div class="grid-x">
-  <div class="cell small-2">2</div>
-  <div class="cell small-10">10, last</div>
+<div class='grid-x'>
+  <div class='cell small-2'>2</div>
+  <div class='cell small-10'>10, last</div>
 </div>
-<div class="grid-x">
-  <div class="cell small-3">3</div>
-  <div class="cell small-9">9, last</div>
+<div class='grid-x'>
+  <div class='cell small-3'>3</div>
+  <div class='cell small-9'>9, last</div>
 </div>
 ```
 
-<div class="grid-x display">
-  <div class="cell small-2">2</div>
-  <div class="cell small-10">10, last</div>
+<div class='grid-x display'>
+  <div class='cell small-2'>2</div>
+  <div class='cell small-10'>10, last</div>
 </div>
-<div class="grid-x display">
-  <div class="cell small-3">3</div>
-  <div class="cell small-9">9, last</div>
+<div class='grid-x display'>
+  <div class='cell small-3'>3</div>
+  <div class='cell small-9'>9, last</div>
 </div>
 
 
 
 # Colors
 
-<p class="lead">Below you can find the different values we created that support the primary color variable you can change at any time in <code>\_settings.scss</code></p>
+<p class='lead'>Below you can find the different values we created that support the primary color variable you can change at any time in <code>\_settings.scss</code></p>
 
 ---
 
-<div class="grid-x up-1 medium-up-3 large-up-5">
-  <div class="cell">
-    <div class="color-block">
-      <span style="background: #2199e8"></span>
+<div class='grid-x up-1 medium-up-3 large-up-5'>
+  <div class='cell'>
+    <div class='color-block'>
+      <span style='background: #2199e8'></span>
       #2199e8
     </div>
   </div>
-  <div class="cell">
-    <div class="color-block">
-      <span style="background: #3adb76"></span>
+  <div class='cell'>
+    <div class='color-block'>
+      <span style='background: #3adb76'></span>
       #3adb76
     </div>
   </div>
-  <div class="cell">
-    <div class="color-block">
-      <span style="background: #ffae00"></span>
+  <div class='cell'>
+    <div class='color-block'>
+      <span style='background: #ffae00'></span>
       #ffae00
     </div>
   </div>
-  <div class="cell">
-    <div class="color-block">
-      <span style="background: #ec5840"></span>
+  <div class='cell'>
+    <div class='color-block'>
+      <span style='background: #ec5840'></span>
       #ec5840
     </div>
   </div>
-  <div class="cell">
-    <div class="color-block">
-      <span style="background: #0a0a0a"></span>
+  <div class='cell'>
+    <div class='color-block'>
+      <span style='background: #0a0a0a'></span>
       #0a0a0a
     </div>
   </div>
@@ -168,7 +168,7 @@ As you've probably noticed in the examples above, you have access to a small, me
 
 # Typography
 
-<p class="lead">This design uses Helvetica Neue for headings and paragraph text.</p>
+<p class='lead'>This design uses Helvetica Neue for headings and paragraph text.</p>
 
 ---
 
@@ -212,7 +212,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione 
 
 # Buttons
 
-<p class="lead">Buttons are tied to an action of some kind, whether that button is on a cheese dispenser or launches the rocket that you're strapped to. On the web, we follow similar conventions.</p>
+<p class='lead'>Buttons are tied to an action of some kind, whether that button is on a cheese dispenser or launches the rocket that you're strapped to. On the web, we follow similar conventions.</p>
 
 ---
 
@@ -221,10 +221,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione 
 These buttons are primary calls to action and should be used sparingly. Their size can be adjusted with the `.tiny`, `.small`, and `.large` classes.
 
 ```html_example
-<a href="#" class="primary large button">Large button</a>
-<a href="#" class="primary button">Regular button</a>
-<a href="#" class="primary small button">Small button</a>
-<a href="#" class="primary tiny button">Tiny button</a>
+<a href='#' class='primary large button'>Large button</a>
+<a href='#' class='primary button'>Regular button</a>
+<a href='#' class='primary small button'>Small button</a>
+<a href='#' class='primary tiny button'>Tiny button</a>
 ```
 
 ---
@@ -234,17 +234,17 @@ These buttons are primary calls to action and should be used sparingly. Their si
 These buttons are used for less important, secondary actions on a page.
 
 ```html_example
-<a href="#" class="secondary large button">Large button</a>
-<a href="#" class="secondary button">Regular button</a>
-<a href="#" class="secondary small button">Small button</a>
-<a href="#" class="secondary tiny button">Tiny button</a>
+<a href='#' class='secondary large button'>Large button</a>
+<a href='#' class='secondary button'>Regular button</a>
+<a href='#' class='secondary small button'>Small button</a>
+<a href='#' class='secondary tiny button'>Tiny button</a>
 ```
 
 
 
 # Forms
 
-<p class="lead">Use forms to allow users to interact with the site and provide information to the company.</p>
+<p class='lead'>Use forms to allow users to interact with the site and provide information to the company.</p>
 
 ---
 
@@ -266,7 +266,7 @@ A form should be marked up using its default HTML properties. The ones we make u
 Make forms great and easy to use with the following rules:
 
 - Wrap checkboxes and radio buttons within labels for larger hit areas, and be sure to set the for, name, and id attributes for all applicable elements.
-- Series of checkboxes and radio buttons below within a `<ul class="inline-list">`.
+- Series of checkboxes and radio buttons below within a `<ul class='inline-list'>`.
 - Before selecting any set of fields to use for a required input, explore other options (e.g., radio buttons over select lists).
 
 ---
@@ -290,53 +290,53 @@ Form elements in Foundation are styled based on their type attribute rather than
 
 ```html_example
 <form>
-  <div class="grid-x">
-    <div class="cell large-12">
+  <div class='grid-x'>
+    <div class='cell large-12'>
       <label>Label</label>
-      <input type="text" placeholder="placeholder">
+      <input type='text' placeholder='placeholder'>
     </div>
   </div>
-  <div class="grid-x grid-margin-x">
-    <div class="cell large-6">
+  <div class='grid-x grid-margin-x'>
+    <div class='cell large-6'>
       <label>Label</label>
-      <input type="text" placeholder="placeholder">
+      <input type='text' placeholder='placeholder'>
     </div>
-    <div class="cell large-6">
+    <div class='cell large-6'>
 
         <label>Label</label>
-        <div class="input-group">
-          <input class="input-group-field" type="text" placeholder="placeholder">
-          <span class="input-group-label">.com</span>
+        <div class='input-group'>
+          <input class='input-group-field' type='text' placeholder='placeholder'>
+          <span class='input-group-label'>.com</span>
         </div>
 
     </div>
   </div>
-  <div class="grid-x">
-    <div class="cell large-12">
+  <div class='grid-x'>
+    <div class='cell large-12'>
       <label>Select Box</label>
       <select>
-        <option value="good">Go od</option>
-        <option value="better">Better</option>
-        <option value="best">Best</option>
+        <option value='good'>Go od</option>
+        <option value='better'>Better</option>
+        <option value='best'>Best</option>
       </select>
     </div>
   </div>
-  <div class="grid-x">
-    <div class="cell large-6">
+  <div class='grid-x'>
+    <div class='cell large-6'>
       <label>Choose Your Favorite</label>
-      <input type="radio" name="radio1" value="radio1" id="radio1"><label for="radio1">Red</label>
-      <input type="radio" name="radio2" value="radio2" id="radio2"><label for="radio2">Blue</label>
+      <input type='radio' name='radio1' value='radio1' id='radio1'><label for='radio1'>Red</label>
+      <input type='radio' name='radio2' value='radio2' id='radio2'><label for='radio2'>Blue</label>
     </div>
-    <div class="cell large-6">
+    <div class='cell large-6'>
       <label>Check these out</label>
-      <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
-      <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+      <input id='checkbox1' type='checkbox'><label for='checkbox1'>Checkbox 1</label>
+      <input id='checkbox2' type='checkbox'><label for='checkbox2'>Checkbox 2</label>
     </div>
   </div>
-  <div class="grid-x">
-    <div class="cell large-12">
+  <div class='grid-x'>
+    <div class='cell large-12'>
       <label>Textarea Label</label>
-      <textarea placeholder="placeholder"></textarea>
+      <textarea placeholder='placeholder'></textarea>
     </div>
   </div>
 </form>
@@ -349,7 +349,7 @@ Form elements in Foundation are styled based on their type attribute rather than
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora omnis suscipit id ut laborum recusandae molestias hic aliquid **expedita!** [Non dicta](zurb.com), autem obcaecati error, id ab voluptate unde culpa nulla.
 
 ```html_example
-<a href="#" class="button">Button</a>
-<a href="#" class="button">Button</a>
-<a href="#" class="button">Button</a>
+<a href='#' class='button'>Button</a>
+<a href='#' class='button'>Button</a>
+<a href='#' class='button'>Button</a>
 ```
