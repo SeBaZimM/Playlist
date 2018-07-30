@@ -103,7 +103,6 @@ function Playlist() {
 			htmlScreen.innerHTML = `<img class='cell large-12' src='${playList[element].remoteUrl}' alt='${playList[element].name}'>`;
 
 		setTimeout(play_playList, time[index_time])
-
 		element++;
 		index_time++;
 
