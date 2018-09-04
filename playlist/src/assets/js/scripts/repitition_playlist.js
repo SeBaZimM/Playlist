@@ -32,24 +32,22 @@ function Playlist() {
 	 */
 	var createWeightedPlaylist = function (playlist) {
 
+        // optional
 		typeof playlist === 'string' ? playlist = JSON.parse(playlist) : playlist = playlist;
 		var processedPlaylist = playlist[Object.keys(playlist)];
-		var finalPlaylist = [];
-		var unweightList = {},
-			weightList = {};
+        // optional
 
 		try {
-			var separatedLists = separatePlaylistForWeightedPlay(processedPlaylist);
-			unweightList = separatedLists.unweightedList;
-			weightList = separatedLists.weightedList;
+			var separatedLists 	= separatePlaylistForWeightedPlay(processedPlaylist);
+			var unweightList 	= separatedLists.unweightedList;
+            var weightList 		= separatedLists.weightedList;
+            var finalPlaylist 	= [];
+            var tmp = [];
 
 		} catch (err) {
 			console.log('Could not create weighted playlist through separation!')
 			return processedPlaylist;
 		}
-
-		// INDEX   : 0 0 1 2 2 3 4 4 5 6 6 7 8 8 9 10 10
-		// PLAYLIST: 2 0 0 2 0 0 2 0 0 2 0 0 2 0 0  2 0
 
 		$.each(unweightList, function (element_key, element_unweightList) {
 			$.each(element_unweightList, function (key, element) {
@@ -57,12 +55,21 @@ function Playlist() {
 					if (key % weight === 0) {
 						$.each(wList, function (pElementKey, presentationElement) {
 							finalPlaylist.push(presentationElement);
+							$.each(processedPlaylist, function (proKey, proVal) {
+								if (proVal == presentationElement) tmp.push(proKey);
+                            });
 						});
 					}
 				});
 				finalPlaylist.push(element);
+
+                $.each(processedPlaylist, function (proKey, proVal) {
+                    if (proVal == element) tmp.push(proKey);
+                });
 			});
 		});
+
+		console.log(tmp);
 
 		return finalPlaylist;
 	};
@@ -141,6 +148,9 @@ function Playlist() {
 			if (element == Object.keys(playList).length)
 				element = 0;
 		}
+
+		console.log('playList', playList);
+
 		play_playList();
 	}
 	setOutput()
